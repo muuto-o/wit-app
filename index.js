@@ -69,7 +69,10 @@ function processMessage(message, nlp) {
 
     console.log("trains");
     console.log(traits);
-    if (traits["greetings"] && traits["greetings"][0]["value"] === "true") {
+    if (
+      traits["wit$greetings"] &&
+      traits["wit$greetings"][0]["value"] === "true"
+    ) {
       console.log("Is greeting");
       return getResponseFromMessage(
         "Hi there! Welcome to Bright. How can I help you?"
