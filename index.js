@@ -44,6 +44,10 @@ app.post("/webhook", (req, res) => {
       console.log(nlp);
 
       let response = processMessage(message, nlp);
+
+      console.log("Jumping to send");
+      console.log("response");
+      console.log(response);
       callSendAPI(sender_psid, response);
     });
 
@@ -61,6 +65,8 @@ function processMessage(message, nlp) {
     // Check if greeting
     let traits = nlp["traits"];
 
+    console.log("trains");
+    console.log(traits);
     if (
       traits["wit$greetings"] &&
       traits["wit$greetings"][0]["value"] === "true"
@@ -76,6 +82,12 @@ function processMessage(message, nlp) {
   }
 }
 
+function getDefaultResponse() {
+  return getResponseFromMessage(
+    "We could not understand your message. Kindly rephrase your message and send us again."
+  );
+}
+
 function getResponseFromMessage(message) {
   const response = {
     text: message,
@@ -87,11 +99,5 @@ function getResponseFromMessage(message) {
 export const listener = app.listen(PORT, () => {
   console.log(`Webhook is listening on port ${PORT}`);
 });
-
-function getDefaultResponse() {
-  return getResponseFromMessage(
-    "We could not understand your message. Kindly rephrase your message and send us again."
-  );
-}
 
 export default app;
