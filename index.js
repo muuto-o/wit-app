@@ -33,6 +33,11 @@ app.post("/webhook", (req, res) => {
         "Message received from sender " + sender_psid + " : " + message
       );
 
+      console.log("webhook_event");
+      console.log(webhook_event);
+      console.log("webhook_event['message']");
+      console.log(webhook_event["message"]);
+
       let nlp = webhook_event["message"]["nlp"];
 
       console.log("nlp");
