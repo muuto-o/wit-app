@@ -35,6 +35,9 @@ app.post("/webhook", (req, res) => {
 
       let nlp = webhook_event["message"]["nlp"];
 
+      console.log("nlp");
+      console.log(nlp);
+
       let response = processMessage(message, nlp);
       callSendAPI(sender_psid, response);
     });
