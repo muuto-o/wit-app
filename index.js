@@ -47,27 +47,25 @@ app.post("/webhook", (req, res) => {
   }
 });
 
-export function processMessage(message, nlp) {
-  const { intents = [], traits = {} } = nlp;
+// Processes and sends text message
+function processMessage(message, nlp) {
+  if (nlp["intents"].length === 0) {
+    // Check if greeting
+    let traits = nlp["traits"];
 
-  // If there are no intents, check for traits like greetings
-  if (intents.length === 0) {
-    const greeting = traits["wit$greetings"]?.[0]?.value;
-
-    if (greeting === "true") {
-      console.log("✅ Detected greeting");
+    if (
+      traits["wit$greetings"] &&
+      traits["wit$greetings"][0]["value"] === "true"
+    ) {
+      console.log("Is greeting");
       return getResponseFromMessage(
         "Hi there! Welcome to Bright. How can I help you?"
       );
     }
 
-    console.log("🤖 No intent or greeting found. Sending default response.");
+    console.log("Returning default response");
     return getDefaultResponse();
   }
-
-  // You can expand here: handle intents like 'buy', 'help', etc.
-  console.log("📌 Detected intent(s):", intents.map((i) => i.name).join(", "));
-  return getDefaultResponse();
 }
 
 function getResponseFromMessage(message) {
