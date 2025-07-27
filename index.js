@@ -88,4 +88,10 @@ export const listener = app.listen(PORT, () => {
   console.log(`Webhook is listening on port ${PORT}`);
 });
 
+function getDefaultResponse() {
+  return getResponseFromMessage(
+    "We could not understand your message. Kindly rephrase your message and send us again."
+  );
+}
+
 export default app;

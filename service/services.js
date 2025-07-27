@@ -1,12 +1,6 @@
 // services.js
 import axios from "axios";
 
-function getDefaultResponse() {
-  return getResponseFromMessage(
-    "We could not understand your message. Kindly rephrase your message and send us again."
-  );
-}
-
 /**
  * Sends response messages via the Facebook Send API
  * @param {string} sender_psid - The Page-Scoped ID of the user
