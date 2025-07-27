@@ -1,5 +1,6 @@
 // Sends response messages via the Send API
 export function callSendAPI(sender_psid, response) {
+  console.log("first line callSendApi");
   // Construct the message body
   let request_body = {
     messaging_type: "RESPONSE",
@@ -9,6 +10,8 @@ export function callSendAPI(sender_psid, response) {
     message: response,
   };
 
+  console.log("request-body:");
+  console.log(request_body);
   // Send the HTTP request to the Messenger Platform
   request(
     {
@@ -21,6 +24,9 @@ export function callSendAPI(sender_psid, response) {
       if (!err) {
         console.log("Message sent!");
       } else {
+        console.log(
+          "----------------------------------------------------ERROR-------------------------------------------------"
+        );
         console.error("Unable to send message: " + err);
       }
     }
