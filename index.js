@@ -38,9 +38,9 @@ app.post("/webhook", (req, res) => {
       console.log("webhook_event['message']");
       console.log(webhook_event["message"]);
 
-      let nlp = webhook_event["message"]["nlp"];
+      let nlp = webhook_event["message"]["nlpv2"];
 
-      console.log("nlp");
+      console.log("nlpv2");
       console.log(nlp);
 
       let response = processMessage(message, nlp);
