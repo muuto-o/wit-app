@@ -87,17 +87,22 @@ function processMessage(message, nlp) {
 
   // Get the intent with the highest confidence
   let intent = nlp["intents"][0]["name"];
+  console.log("intent");
+  console.log(intent);
   let confidence = nlp["intents"][0]["confidence"];
 
   // If confidence of intent is less than threshold, do not process
   if (confidence < 0.7) return getDefaultResponse();
 
   let entities = nlp["entities"];
+  console.log("entities");
+  console.log(entities);
   let highest_confidence = 0;
 
   switch (intent) {
-    case "enquiry_general":
+    case "location":
       // Get entity with highest confidence
+      console.log("Locations intent detected");
       let entity = null;
       for (const e in entities) {
         let confidence = entities[e][0]["confidence"];
