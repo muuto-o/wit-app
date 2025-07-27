@@ -70,7 +70,6 @@ function processMessage(message, nlp) {
     console.log("trains");
     console.log(traits);
     console.log("-------------------");
-    console.log(traits["wit$greetings"]);
     if (
       traits["wit$greetings"] &&
       traits["wit$greetings"][0]["value"] === "true"
