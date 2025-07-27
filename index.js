@@ -33,7 +33,9 @@ app.post("/webhook", (req, res) => {
         "Message received from sender " + sender_psid + " : " + message
       );
 
-      let response = getResponseFromMessage(message);
+      let nlp = webhook_event["message"]["nlp"];
+
+      let response = processMessage(message, nlp);
       callSendAPI(sender_psid, response);
     });
 
@@ -45,7 +47,29 @@ app.post("/webhook", (req, res) => {
   }
 });
 
-// Wrapper method to convert text message string to response object, and sends the message
+export function processMessage(message, nlp) {
+  const { intents = [], traits = {} } = nlp;
+
+  // If there are no intents, check for traits like greetings
+  if (intents.length === 0) {
+    const greeting = traits["wit$greetings"]?.[0]?.value;
+
+    if (greeting === "true") {
+      console.log("✅ Detected greeting");
+      return getResponseFromMessage(
+        "Hi there! Welcome to Bright. How can I help you?"
+      );
+    }
+
+    console.log("🤖 No intent or greeting found. Sending default response.");
+    return getDefaultResponse();
+  }
+
+  // You can expand here: handle intents like 'buy', 'help', etc.
+  console.log("📌 Detected intent(s):", intents.map((i) => i.name).join(", "));
+  return getDefaultResponse();
+}
+
 function getResponseFromMessage(message) {
   const response = {
     text: message,
