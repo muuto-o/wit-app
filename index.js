@@ -62,7 +62,7 @@ app.post("/webhook", (req, res) => {
 // Processes and sends text message
 function processMessage(message, nlp) {
   console.log("processMesasge Function");
-  if (nlp["intents"]?.length === 0) {
+  if (nlp["intents"] === undefined) {
     // Check if greeting
     let traits = nlp["traits"];
 
