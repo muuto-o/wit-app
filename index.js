@@ -64,6 +64,7 @@ function processMessage(message, nlp) {
   console.log("processMesasge Function");
   if (nlp["intents"] === undefined) {
     // Check if greeting
+    console.log("no intent");
     let traits = nlp["traits"];
 
     console.log("trains");
