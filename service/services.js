@@ -7,6 +7,11 @@ import axios from "axios";
  * @param {object} response - The message object to send
  */
 export async function callSendAPI(sender_psid, response) {
+  const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+  //   console.log("PAGE_ACCESS_TOKEN");
+  //   console.log(PAGE_ACCESS_TOKEN);
+  //   console.log();
+  //   console.log();
   const request_body = {
     messaging_type: "RESPONSE",
     recipient: {
@@ -26,7 +31,7 @@ export async function callSendAPI(sender_psid, response) {
       request_body,
       {
         params: {
-          access_token: process.env.PAGE_ACCESS_TOKEN,
+          access_token: PAGE_ACCESS_TOKEN,
         },
       }
     );
